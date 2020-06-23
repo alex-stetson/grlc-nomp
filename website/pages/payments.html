@@ -1,0 +1,41 @@
+<div id="workersPage">
+    <div id="topCharts">
+        {{ function readableDate(a){ return new Date(parseInt(a)).toString(); } }}
+        {{ for (var i = 0, poolNames = Object.keys(it.stats.pools).sort(); i < poolNames.length; i++) { var pool = poolNames[i]; }}
+        <div class="chartWrapper card">
+            <div class="chartLabel"><amp-img src="{{=it.poolsConfigs[pool].logo}}" width="{{=it.poolsConfigs[pool].logoWidth}}" height="{{=it.poolsConfigs[pool].logoHeight}}" layout="fixed"></amp-img> {{=it.stats.pools[pool].name.replace(/(^([a-zA-Z\p{M}]))|([ -][a-zA-Z\p{M}])/g,function(s){return s.toUpperCase()})}}</div>
+            <div id="paymentsPage" class="chartHolder">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Blocks</th>
+                            <th>Time</th>
+                            <th>Miners</th>
+                            <th>Shares</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{ for(var p in it.stats.pools[pool].payments) { }}
+                        <tr class="odd">
+                            <td>
+                                {{ if (it.poolsConfigs[pool].coin.explorer && it.poolsConfigs[pool].coin.explorer.txURL) { }}
+                                <a href="{{=it.poolsConfigs[pool].coin.explorer.txURL + it.stats.pools[pool].payments[p].txid}}" title="View Transaction" target="_blank">{{=it.stats.pools[pool].payments[p].blocks.join(', ')}}</a>
+                                {{ } else { }}
+                                    {{=it.stats.pools[pool].payments[p].blocks.join(', ')}}
+                                {{ } }}
+                            </td>
+                            <td>{{=readableDate(it.stats.pools[pool].payments[p].time)}}</td>
+                            <td>{{=it.stats.pools[pool].payments[p].miners}}</td>
+                            <td>{{=Math.round(it.stats.pools[pool].payments[p].shares)}}</td>
+                            <td>{{=it.stats.pools[pool].payments[p].paid}} {{=it.stats.pools[pool].symbol}}</td>
+                        </tr>
+                        {{ } }}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        {{ } }}
+    </div>
+</div>
+

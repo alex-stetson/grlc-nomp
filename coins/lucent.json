@@ -1,0 +1,15 @@
+{
+	"name": "Lucent",
+	"symbol": "LCNT",
+	"algorithm": "sha256",
+	"mposDiffMultiplier": 256,
+	"coinbase": "Crypto Pools by AoD Technologies LLC - https://cryptopools.aod-tech.com",
+	"peerMagic": "d30c6bbd",
+	"peerMagicTestnet": "cee2caff",
+	"version_mask": "1fffe000",
+	"explorer": {
+		"txURL": "http://mnpro.mascsolutions.uk:3018/tx/",
+		"blockURL": "http://mnpro.mascsolutions.uk:3018/block/"
+	}
+}
+
